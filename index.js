@@ -17,14 +17,20 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+
+    const listener = (eventName, ...args) => {
+        console.log(eventName, args);
+      }
+      
+    // socket.onAny(listener);
     socket.on("video_stream", (data) => {
         console.log('received', data);
-        try {
-            const base64data = new Buffer.from(data?.data).toString('base64');
-            console.log(base64data);
-        } catch (e) {
-            console.log(`error: ${e}`);
-        };
+        // try {
+        //     const base64data = new Buffer.from(data?.data).toString('base64');
+        //     console.log("-------", base64data);
+        // } catch (e) {
+        //     console.log(`error: ${e}`);
+        // };
     });
 });
 
